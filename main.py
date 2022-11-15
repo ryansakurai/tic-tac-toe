@@ -2,6 +2,7 @@ import random
 
 
 EMPTY_SPACE = '-'
+DIV = '-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'
 
 
 def print_board(board):
@@ -68,7 +69,11 @@ def play_game(players):
             print(f"<< {player['name']} >>")
             position = read_coordinates(board)
             board[position] = player['mark']
-            print('------------------------------------')
+
+            print()
+            print(DIV)
+            print()
+
             if verify_win(board, player['mark']):
                 print_board(board)
                 print( f"Winner: {player['name']}" )
@@ -95,7 +100,7 @@ print_board( [None] + list(range(1, 10)) )
 
 players = []
 
-# reading player id
+# reading playerS id
 for i in range(1, 3):
     print(f'<< Player {i} >>')
     name = input('Name: ')
@@ -109,16 +114,18 @@ for i in range(1, 3):
         else:
             break
     players.append( {'name': name, 'mark': mark} )
+    print()
 
-print('------------------------------------')
+print(DIV)
+print()
 
 continue_playing = True
 
 while continue_playing:
     play_game(players)
+    print()
 
-    print('------------------------------------')
-
+    option = None
     while True:
         option = input('Continue playing (y/n)? ')
         if option in ('y', 'n'):
@@ -127,3 +134,7 @@ while continue_playing:
             print('Invalid option!')
     if option == 'n':
         break
+    else:
+        print()
+        print(DIV)
+        print()
