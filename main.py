@@ -24,7 +24,7 @@ def read_number(command):
                 return num
 
 
-def read_coordinates(board, player):
+def read_coordinates(board):
     position = None
     while True:
         position = read_number('Where will you place your mark (1-9)? ')
