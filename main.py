@@ -26,7 +26,6 @@ def read_number(command):
 
 
 def read_coordinates(board):
-    position = None
     while True:
         position = read_number('Where will you place your mark (1-9)? ')
         if board[position] == EMPTY_SPACE:
@@ -60,8 +59,8 @@ def verify_tie(board):
 
 
 def play_game(players):
-    board = [None] + [EMPTY_SPACE]*9
     random.shuffle(players)
+    board = [None] + [EMPTY_SPACE]*9
     done = False
     while not done:
         for player in players:
@@ -104,7 +103,6 @@ players = []
 for i in range(1, 3):
     print(f'<< Player {i} >>')
     name = input('Name: ')
-    mark = None
     while True:
         mark = input('Mark: ')
         if len(mark) > 1:
@@ -125,7 +123,6 @@ while continue_playing:
     play_game(players)
     print()
 
-    option = None
     while True:
         option = input('Continue playing (y/n)? ')
         if option in ('y', 'n'):
