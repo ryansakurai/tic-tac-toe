@@ -18,7 +18,7 @@ def print_board(board: list) -> None:
         Nothing
     """
 
-    # row by row
+    # prints it row by row
     for i in range(1, 8, 3):
         print( f'{board[i]}\t{board[i+1]}\t{board[i+2]}' )
         print()
@@ -58,6 +58,7 @@ def read_position(board: list) -> int:
 
     while True:
         position = read_number('Where will you place your mark (1-9)? ')
+        ## available position
         if board[position] == EMPTY_SPACE:
             break
         else:
@@ -118,9 +119,10 @@ def play_game(players: Union[list, tuple]) -> None:
         Nothing
     """
 
-    random.shuffle(players)
-    board = [None] + [EMPTY_SPACE]*9
+    random.shuffle(players) ## randomized play order
+    board = [None] + [EMPTY_SPACE]*9 ## board[0] not used
     done = False
+    
     while not done:
         for player in players:
             print_board(board)
@@ -166,7 +168,7 @@ for i in range(1, 3):
         mark = input('Mark: ')
         if len(mark) > 1:
             print('Please enter just one character')
-        elif mark in (EMPTY_SPACE, '_'):
+        elif mark in (EMPTY_SPACE, '_'): ## '_' too similar to EMPTY_SPACE
             print('Invalid mark')
         else:
             break
