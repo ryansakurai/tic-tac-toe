@@ -66,7 +66,7 @@ def play_game(players):
         for player in players:
             print_board(board)
             print(f"<< {player['name']} >>")
-            position = read_coordinates(board, player)
+            position = read_coordinates(board)
             board[position] = player['mark']
             print('------------------------------------')
             if verify_win(board, player['mark']):
