@@ -5,8 +5,9 @@ EMPTY_SPACE = '-'
 
 
 def print_board(board):
-    for row in board:
-        print( f'{row[0]}\t{row[1]}\t{row[2]}' )
+    # row by row
+    for i in range(1, 8, 3):
+        print( f'{board[i]}\t{board[i+1]}\t{board[i+2]}' )
         print()
 
 
@@ -15,70 +16,60 @@ def read_number(command):
         num = input(command)
         if not num.isdigit():
             print('Must be a number')
-        elif num not in ('1', '2', '3'):
-            print('Must be between 1 and 3')
         else:
-            return int(num) - 1
+            num = int(num)
+            if num not in range(1, 10):
+                print('Must be between 1 and 9')
+            else:
+                return num
 
 
 def read_coordinates(board, player):
+    position = None
     while True:
-        line = read_number('Line (1-3): ')
-        column = read_number('Column (1-3): ')
-        if board[line][column] in ('-', '_'):
+        position = read_number('Where will you place your mark (1-9)? ')
+        if board[position] == EMPTY_SPACE:
             break
         else:
             print('Space occupied')
+    return position
 
-    return line, column
 
-
-def verify_win(board, symbol):
-    # main diagonal
-    if board[0][0] == board[1][1] == board[2][2] == symbol:
+def verify_win(board, mark):
+    # primary diagonal
+    if board[1] == board[5] == board[9] == mark:
         return True
-    # other diagonal
-    elif board[0][2] == board[1][1] == board[2][0] == symbol:
+    # secondary diagonal
+    elif board[3] == board[5] == board[7] == mark:
         return True
-    # first column
-    elif board[0][0] == board[1][0] == board[2][0] == symbol:
-        return True
-    # second column
-    elif board[0][1] == board[1][1] == board[2][1] == symbol:
-        return True
-    # third column
-    elif board[0][2] == board[1][2] == board[2][2] == symbol:
-        return True
-    # rows
     else:
-        for row in board:
-            if row[0] == row[1] == row[2] == symbol:
+        # columns
+        for i in range(1, 4):
+            if board[i] == board[i+3] == board[i+6] == mark:
                 return True
-        else:
-            return False
+        # rows
+        for i in range(1, 8, 3):
+            if board[i] == board[i+1] == board[i+2] == mark:
+                return True
+        return False
 
 
 def verify_tie(board):
-    tie = True
-    for row in board:
-        if EMPTY_SPACE in row:
-            tie = False
-            break
-    return tie
+    return EMPTY_SPACE not in board
 
 
 def play_game(players):
-    board = ( [EMPTY_SPACE]*3, [EMPTY_SPACE]*3, [EMPTY_SPACE]*3 )
+    board = [None] + [EMPTY_SPACE]*9
     random.shuffle(players)
     done = False
     while not done:
         for player in players:
             print_board(board)
             print(f"<< {player['name']} >>")
-            line, column = read_coordinates(board, player)
-            board[line][column] = player['symbol']
+            position = read_coordinates(board, player)
+            board[position] = player['mark']
             print('------------------------------------')
-            if verify_win(board, player['symbol']):
+            if verify_win(board, player['mark']):
                 print_board(board)
                 print( f"Winner: {player['name']}" )
                 print('Congratulations!!!')
@@ -98,6 +89,9 @@ print(' | __| |/ __| | __/ _` |/ __| | __/ _ \ / _ \\')
 print(' | |_| | (__  | || (_| | (__  | || (_) |  __/')
 print('  \__|_|\___|  \__\__,_|\___|  \__\___/ \___|')
 print()
+print('Board layout:')
+print()
+print_board( [None] + list(range(1, 10)) )
 
 players = []
 
@@ -105,16 +99,16 @@ players = []
 for i in range(1, 3):
     print(f'<< Player {i} >>')
     name = input('Name: ')
-    symbol = None
+    mark = None
     while True:
-        symbol = input('Symbol: ')
-        if len(symbol) > 1:
-            print('Please enter just one symbol')
-        elif symbol == EMPTY_SPACE:
-            print('Invalid symbol')
+        mark = input('Mark: ')
+        if len(mark) > 1:
+            print('Please enter just one character')
+        elif mark in (EMPTY_SPACE, '_'):
+            print('Invalid mark')
         else:
             break
-    players.append( {'name': name, 'symbol': symbol} )
+    players.append( {'name': name, 'mark': mark} )
 
 print('------------------------------------')
 
