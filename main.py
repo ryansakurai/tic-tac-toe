@@ -1,5 +1,8 @@
 """
+TIC-TAC-TOE
 
+Implements the game tic-tac-toe, allowing the players to choose their own marks (instead of just X and O) and to rematch.
+It indexes the board from 1 to 9 (left to right, top to bottom)
 """
 
 import random
