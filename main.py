@@ -1,3 +1,7 @@
+"""
+
+"""
+
 import random
 from typing import Union
 
@@ -122,7 +126,7 @@ def play_game(players: Union[list, tuple]) -> None:
     random.shuffle(players) ## randomized play order
     board = [None] + [EMPTY_SPACE]*9 ## board[0] not used
     done = False
-    
+
     while not done:
         for player in players:
             print_board(board)
@@ -150,7 +154,7 @@ def play_game(players: Union[list, tuple]) -> None:
 print('  _   _        _               _             ')
 print(' | | (_)      | |             | |            ')
 print(' | |_ _  ___  | |_ __ _  ___  | |_ ___   ___ ')
-print(' | __| |/ __| | __/ _` |/ __| | __/ _ \ / _ \\')
+print(' | __| |/ __| | __/ _` |/ __| | __/ _ \ / _ \ ')
 print(' | |_| | (__  | || (_| | (__  | || (_) |  __/')
 print('  \__|_|\___|  \__\__,_|\___|  \__\___/ \___|')
 print()
@@ -179,7 +183,6 @@ print(DIV)
 print()
 
 continue_playing = True
-
 while continue_playing:
     play_game(players)
     print()
@@ -191,7 +194,7 @@ while continue_playing:
         else:
             print('Invalid option!')
     if option == 'n':
-        break
+        continue_playing = False
     else:
         print()
         print(DIV)
