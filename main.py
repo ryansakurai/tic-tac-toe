@@ -21,8 +21,6 @@ def print_board(board: list) -> None:
 
     Parameters:
         board: list with 10 spots representing the board (the first one is not used)
-    Returns:
-        Nothing
     """
 
     # prints it row by row
@@ -122,8 +120,6 @@ def play_game(players: Iterable[dict[str]]) -> None:
     Parameters:
         players: iterable collection containing the players, which are
                  a dictionary containing their name and mark
-    Returns:
-        Nothing
     """
 
     random.shuffle(players) ## randomized play order
