@@ -1,13 +1,13 @@
 """
 TIC-TAC-TOE
 
-Implements the game tic-tac-toe, allowing the players to choose their own marks (instead of just X and O) and to rematch.
+Implements the game tic-tac-toe, allowing the players to choose
+their own marks (instead of just X and O) and to rematch.
 It indexes the board from 1 to 9 (left to right, top to bottom)
 """
 
 import random
-from typing import Union
-
+from typing import Iterable
 
 ## character used to represent an empty space in the board
 EMPTY_SPACE = '-'
@@ -115,7 +115,7 @@ def verify_tie(board: list) -> bool:
     return EMPTY_SPACE not in board
 
 
-def play_game(players: Union[list, tuple]) -> None:
+def play_game(players: Iterable[dict[str]]) -> None:
     """
     Starts the game and ends it in case of a win or tie
 
@@ -154,12 +154,12 @@ def play_game(players: Union[list, tuple]) -> None:
                 break
 
 
-print('  _   _        _               _             ')
-print(' | | (_)      | |             | |            ')
-print(' | |_ _  ___  | |_ __ _  ___  | |_ ___   ___ ')
-print(' | __| |/ __| | __/ _` |/ __| | __/ _ \ / _ \ ')
-print(' | |_| | (__  | || (_| | (__  | || (_) |  __/')
-print('  \__|_|\___|  \__\__,_|\___|  \__\___/ \___|')
+print(r'  _   _        _               _             ')
+print(r' | | (_)      | |             | |            ')
+print(r' | |_ _  ___  | |_ __ _  ___  | |_ ___   ___ ')
+print(r' | __| |/ __| | __/ _` |/ __| | __/ _ \ / _ \ ')
+print(r' | |_| | (__  | || (_| | (__  | || (_) |  __/')
+print(r'  \__|_|\___|  \__\__,_|\___|  \__\___/ \___|')
 print()
 print('Board layout:')
 print()
